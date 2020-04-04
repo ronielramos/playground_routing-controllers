@@ -1,9 +1,11 @@
 {
    "name": "playground_routing-controllers",
-   "version": "1.0.0",
+   "version": "0.1.0",
    "description": "test project of routing-controllers and typeorm together",
    "main": "src/app.ts",
    "scripts": {
+      "lint": "eslint src/** --ext .ts",
+      "build": "tsc",
       "start": "nodemon src/server.ts",
       "m:create": "node -r dotenv/config -r ts-node/register ./node_modules/typeorm/cli.js migration:create -n",
       "m:up": "node -r dotenv/config -r ts-node/register ./node_modules/typeorm/cli.js migration:run",
