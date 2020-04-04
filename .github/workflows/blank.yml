@@ -28,6 +28,10 @@ jobs:
 
 
     # Runs a set of commands using the runners shell
+    - name: instalar dependencias
+      run:
+        npm i
+
     - name: rodar lint
       run:
         npm run lint
