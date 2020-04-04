@@ -1,13 +1,15 @@
 
-import { Controller, Param, Body, Get, Post, Delete, JsonController, Patch } from 'routing-controllers'
+import { Param, Body, Get, Post, Delete, JsonController, Patch, QueryParam } from 'routing-controllers'
 import { Product } from '../entities/Product'
 
 @JsonController()
-@Controller()
 export class ProductController {
   @Get('/products')
-  getAll () {
-    return 'This action returns all products'
+  async getAll (@QueryParam('page') page: number) {
+    const correctPage = page > 0 ? page - 1 : 0
+    const skip = (correctPage || 1) * 10
+    const products = await Product.find({ take: 10, skip })
+    return products
   }
 
   @Get('/products/:id')
@@ -16,7 +18,7 @@ export class ProductController {
   }
 
   @Post('/products')
-  post (@Body() product: Product) {
+  post (@Body({ validate: true }) product: Product) {
     return product.save()
   }
 
